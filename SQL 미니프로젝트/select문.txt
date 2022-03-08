@@ -1,0 +1,27 @@
+서울시 코로나 확산 추이에 따른 업종별 매출 변화에 대한 다각화 분석
+
+--분기별 매출액 합계
+select quarter, to_char(sum(quarter_sales), 'fm99,999,999,999,999') 
+	from quarter_sales group by(quarter) order by quarter;
+
+--분기별 요일별 매출액 합계
+select quarter, 
+	to_char(sum(monday_sales), 'fm99,999,999,999,999'), 
+	to_char(sum(tuesday_sales), 'fm99,999,999,999,999'), 
+	to_char(sum(wednesday_sales), 'fm99,999,999,999,999'),
+	to_char(sum(thursday_sales), 'fm99,999,999,999,999'),
+	to_char(sum(friday_sales), 'fm99,999,999,999,999'), 
+	to_char(sum(saturday_sales), 'fm99,999,999,999,999'),
+	to_char(sum(sunday_sales), 'fm99,999,999,999,999')
+	from week_sales group by(quarter) order by quarter;
+	
+--분기별 시간대별 매출액 합계
+select quarter,
+	to_char(sum(time_00_06), 'fm99,999,999,999,999'),
+	to_char(sum(time_06_11), 'fm99,999,999,999,999'),
+	to_char(sum(time_11_14), 'fm99,999,999,999,999'),
+	to_char(sum(time_14_17), 'fm99,999,999,999,999'),
+	to_char(sum(time_17_21), 'fm99,999,999,999,999'),
+	to_char(sum(time_21_24), 'fm99,999,999,999,999')
+	from times_sales group by(quarter) order by quarter;
+
